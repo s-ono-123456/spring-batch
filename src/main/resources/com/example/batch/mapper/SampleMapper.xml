@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.batch.mapper.SampleMapper">
+  <select id="select001" resultType="com.example.batch.bean.ItemReaderBean01">
+    SELECT test
+      FROM sample
+      where id = '001'
+  </select>
+  <!--sampleテーブルにデータを登録する-->
+  <insert id="insert001" parameterType="com.example.batch.bean.ItemWriterBean01">
+    INSERT INTO sample
+    VALUES ('004', #{test}, 'data004');
+  </insert>
+  
+</mapper>
