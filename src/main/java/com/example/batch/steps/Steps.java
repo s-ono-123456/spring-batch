@@ -1,14 +1,10 @@
 package com.example.batch.steps;
 
-import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,14 +22,11 @@ public class Steps {
 	@Autowired
 	private Tasklet tasklet01;
 	@Autowired
-	private Tasklet tasklet02;
-	
-	@Autowired
 	private MyBatisCursorItemReader<ItemReaderBean01> reader01;
 	@Autowired
 	private ItemProcessor01 processor01;
 	@Autowired
-	private MyBatisBatchItemWriter<ItemWriterBean01> writer01;
+	private CompositeItemWriter<ItemWriterBean01> writer01;
 	
 	
 	//Step01:基本的なTaklet型のStepの作成
