@@ -4,12 +4,12 @@
   <select id="select001" resultType="com.example.batch.bean.ItemReaderBean01">
     SELECT test
       FROM sample
-      where id IN ('002')
+      where id IN ('001','002')
   </select>
   <!--sampleテーブルにデータを登録する-->
   <insert id="insert001" parameterType="com.example.batch.bean.ItemWriterBean01">
     INSERT INTO sample
-    VALUES ('005', #{test}, 'data005');
+    VALUES (#{id}, #{test}, #{data});
   </insert>
   
 </mapper>
