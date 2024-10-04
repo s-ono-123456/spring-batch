@@ -23,31 +23,31 @@ import com.example.batch.bean.ItemWriterBean01;
 import com.example.batch.common.BaseDatabaseItemWriter;
 import com.example.batch.common.CustomSkipPolicy;
 import com.example.batch.processor.ItemProcessor01;
+import com.example.batch.processor.ItemProcessor02;
 
 @Configuration
-public class Step02Configuration {
+public class Step03Configuration {
 	
 	@Autowired
 	private ItemReader<ItemReaderBean01> csvFileItemReader;
 	@Autowired
-	private ItemProcessor01 processor01;
+	private ItemProcessor02 processor02;
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
     //Step02:基本的なChunk型Stepの作成
     @Bean
-    public Step step02(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-        return new StepBuilder("step02", jobRepository)
+    public Step step03(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("step03", jobRepository)
                 .<ItemReaderBean01, ItemWriterBean01>chunk(3, transactionManager)
                 .reader(reader())
-                .processor(processor01)
+                .processor(processor02)
                 .writer(writer())
                 .faultTolerant()
                 .skipPolicy(new CustomSkipPolicy())
                 .build();
     }
     
-	@Bean
-	public MyBatisCursorItemReader<ItemReaderBean01> reader() {
+    public MyBatisCursorItemReader<ItemReaderBean01> reader() {
 		// SELECTにバインド変数を利用したい場合は以下を設定する。
 		//Map<String, Object> parameterValues = new HashMap<String, Object>();
 		
@@ -58,7 +58,7 @@ public class Step02Configuration {
 			    .build();
 	}
     
-	@Bean
+    
 	public CompositeItemWriter<ItemWriterBean01> writer() {
 		List<ItemWriter<? super ItemWriterBean01>> writers = new ArrayList<>();
 		writers.add(writer01());
@@ -71,15 +71,7 @@ public class Step02Configuration {
 	private BaseDatabaseItemWriter<ItemWriterBean01> writer01() {
 		BaseDatabaseItemWriter<ItemWriterBean01> writer = new BaseDatabaseItemWriter<>();
 		writer.setSqlSessionFactory(sqlSessionFactory);
-		writer.setStatementId("com.example.batch.mapper.SampleMapper.insert001");
-		writer.afterPropertiesSet();
-		
-		return writer;
-	}
-	private BaseDatabaseItemWriter<ItemWriterBean01> writer02() {
-		BaseDatabaseItemWriter<ItemWriterBean01> writer = new BaseDatabaseItemWriter<>();
-		writer.setSqlSessionFactory(sqlSessionFactory);
-		writer.setStatementId("com.example.batch.mapper.SampleMapper.insert001");
+		writer.setStatementId("com.example.batch.mapper.SampleMapper.update001");
 		writer.afterPropertiesSet();
 		
 		return writer;

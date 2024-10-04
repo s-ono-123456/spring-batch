@@ -26,7 +26,7 @@ import com.example.batch.common.BaseProcessor;
 import com.example.batch.mapper.SampleMapper;
 
 @Component
-public class ItemProcessor01 extends BaseProcessor<ItemReaderBean01, ItemWriterBean01>
+public class ItemProcessor02 extends BaseProcessor<ItemReaderBean01, ItemWriterBean01>
          implements SkipListener<ItemReaderBean01, ItemWriterBean01>
                    , StepListener, ChunkListener, StepExecutionListener, ItemWriteListener<ItemWriterBean01>{
 	
@@ -43,30 +43,11 @@ public class ItemProcessor01 extends BaseProcessor<ItemReaderBean01, ItemWriterB
 	@Override
 	protected ItemWriterBean01 executeIndividually(ItemReaderBean01 item) {
 		ItemWriterBean01 output = new ItemWriterBean01();
-		int id = Integer.parseInt(item.getId())+100;
+		int id = Integer.parseInt(item.getId());
 		output.setTest(item.getTest() + "add");
 		output.setData(item.getData());
 		output.setId(Integer.toString(id));
-		output.setDate(null);
 		
-		ItemWriterBean01 output2 = new ItemWriterBean01();
-		int id2 = Integer.parseInt(item.getId())+200;
-		output2.setTest(item.getTest() + "add");
-		output2.setData(item.getData());
-		output2.setId(Integer.toString(id2));
-		output2.setDate(null);
-		
-		sampleMapper.insert001(output2);
-		
-		// これをつけると正常に更新できなくなる。
-//		ItemWriterBean01 output3 = new ItemWriterBean01();
-//		int id3 = Integer.parseInt(item.getId());
-//		output3.setTest(item.getTest() + "add");
-//		output3.setData(item.getData());
-//		output3.setId(item.getId());
-//
-//		sampleMapper.update001(output3);
-//		
 		return output;
 	}
 	

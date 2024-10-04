@@ -1,9 +1,13 @@
 package com.example.batch.bean;
 
+import java.time.LocalDate;
+
 public class ItemReaderBean01 {
 	private String id;
 	private String test;
 	private String data;
+	private LocalDate date;
+
 	public String getId() {
 		return id;
 	}
@@ -21,6 +25,12 @@ public class ItemReaderBean01 {
 	}
 	public void setData(String data) {
 		this.data = data;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 }

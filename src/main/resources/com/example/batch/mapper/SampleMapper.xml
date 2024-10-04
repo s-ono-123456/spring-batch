@@ -2,14 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.batch.mapper.SampleMapper">
   <select id="select001" resultType="com.example.batch.bean.ItemReaderBean01">
-    SELECT test
+    SELECT id, test, data
       FROM sample
-      where id IN ('001','002')
+      where test = 'testa'
   </select>
-  <!--sampleテーブルにデータを登録する-->
+  <!--sampleテーブルにデータを登録する , jdbcType=DATEをつければOK-->
   <insert id="insert001" parameterType="com.example.batch.bean.ItemWriterBean01">
-    INSERT INTO sample
-    VALUES (#{id}, #{test}, #{data});
+    INSERT INTO sample(id, test, data, date)
+    VALUES (#{id}, #{test}, #{data}, #{date});
   </insert>
+  <update id="update001" parameterType="com.example.batch.bean.ItemWriterBean01">
+    UPDATE sample
+    SET test = #{test}
+    WHERE id = #{id};
+  </update>
   
 </mapper>

@@ -11,4 +11,5 @@ import com.example.batch.bean.ItemWriterBean01;
 public interface SampleMapper {
 	public List<ItemReaderBean01> select001();
     public int insert001(ItemWriterBean01 itemwWriterBean01);
+    public int update001(ItemWriterBean01 itemwWriterBean01);
 }
